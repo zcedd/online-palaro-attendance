@@ -1,0 +1,1 @@
+<img src="{{ asset('images/logo/ilocosnorte-sm.png') }}" alt="ilocos norte">

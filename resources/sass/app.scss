@@ -1,0 +1,15 @@
+// Fonts
+// @import url("https://fonts.bunny.net/css?family=Nunito");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Condensed&family=Tinos&display=swap");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "bootstrap/scss/bootstrap";
+
+// Custom
+@import "custom";
+
+// Livewire/Powergrid
+@import "../../node_modules/flatpickr/dist/flatpickr.min.css";

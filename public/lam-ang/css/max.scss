@@ -1,0 +1,58 @@
+//// max.scss
+//
+//// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+//@import "../bootstrap-5.3.0/scss/functions";
+//
+//// 2. Include any default variable overrides here
+//
+//// 3. Include remainder of required Bootstrap stylesheets (including any separate color mode stylesheets)
+//@import "../bootstrap-5.3.0/scss/variables";
+//@import "../bootstrap-5.3.0/scss/variables-dark";
+//
+//// 4. Include any default map overrides here
+//
+//// 5. Include remainder of required parts
+//@import "../bootstrap-5.3.0/scss/maps";
+//@import "../bootstrap-5.3.0/scss/mixins";
+//@import "../bootstrap-5.3.0/scss/root";
+//
+//// 6. Optionally include any other parts as needed
+//@import "../bootstrap-5.3.0/scss/utilities";
+//@import "../bootstrap-5.3.0/scss/reboot";
+//@import "../bootstrap-5.3.0/scss/type";
+//@import "../bootstrap-5.3.0/scss/images";
+//@import "../bootstrap-5.3.0/scss/containers";
+//@import "../bootstrap-5.3.0/scss/grid";
+//@import "../bootstrap-5.3.0/scss/helpers";
+//
+//// 7. Optionally include utilities API last to generate classes based on the Sass map in `_utilities.scss`
+//@import "../bootstrap-5.3.0/scss/utilities/api";
+//
+//// 8. Add additional custom code here
+$primary: #2a5196;
+$dark: #252525;
+$black: #252525;
+
+@import "../bootstrap-5.3.0/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Condensed&family=Tinos&display=swap');
+body{
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    //font-family: 'Oswald', sans-serif;
+    font-family: 'Bebas Neue', cursive;
+    letter-spacing: 0.1em;
+}
+
+
+.read{
+    font-family: 'Tinos', serif;
+}
+
+.h6, .h5, .h4, .h3, .h2, .h1, .p {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.1em;
+}
+
