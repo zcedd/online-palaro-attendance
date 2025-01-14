@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\Route;
 /*
  * Super Administrator Account
  */
-use App\Livewire\Administrator\Users\Index as SuperAdminUsers;
+use App\Livewire\Attendance\Scanner\Index as Scanner;
 use App\Livewire\Dashboard\Index as Dashboard;
+use App\Livewire\Administrator\Users\Index as SuperAdminUsers;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,7 @@ Route::middleware([
 ])->group(function () {
     Route::get('/administrator/users', SuperAdminUsers::class)->name('dashboards');
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
+    Route::get('/scanner', Scanner::class)->name('scanner');
 });
 
 
