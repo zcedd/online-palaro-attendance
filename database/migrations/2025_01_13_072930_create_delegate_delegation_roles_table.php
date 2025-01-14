@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('delegate_delegation_roles', function (Blueprint $table) {
+        Schema::create('delegate_delegation_role', function (Blueprint $table) {
             $table->id();
             $table->foreignId('delegate_id')->constrained('delegates');
             $table->foreignId('delegation_role_id')->constrained('delegation_roles');
