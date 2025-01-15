@@ -18,10 +18,10 @@ class Index extends Component
             'cameraId' => 'required',
         ]);
         if ($this->isCameraOn) {
-            $this->dispatch('stopCamera');
+            $this->dispatch('stopScanner');
             $this->isCameraOn = false;
         } else {
-            $this->dispatch('startCamera', $this->cameraId);
+            $this->dispatch('startScanner', $this->cameraId);
             $this->isCameraOn = true;
         }
     }
@@ -30,29 +30,17 @@ class Index extends Component
     {
         if ($this->isTorchOn) {
             $this->isTorchOn = false;
-            $this->emit('startTorch', $this->isTorchOn);
+            $this->dispatch('startTorch', $this->isTorchOn);
         } else {
             $this->isTorchOn = true;
-            $this->emit('startTorch', $this->isTorchOn);
+            $this->dispatch('startTorch', $this->isTorchOn);
         }
-    }
-
-    #[On('resumeCamera')]
-    public function resumeCamera()
-    {
-        $this->emit('resumeCamera', $this->cameraId);
     }
 
     #[On('cameraList')]
     public function cameraList($devices)
     {
         $this->cameraLists = $devices;
-    }
-
-    #[On('qrScanned')]
-    public function onScanned($scannedResult)
-    {
-        dd($scannedResult);
     }
 
     public function render()

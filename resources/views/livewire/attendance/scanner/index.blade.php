@@ -38,19 +38,16 @@
             console.log(`Unable to get camera, error: ${err}`);
         });
 
-        $wire.on('stopCamera', () => {
+        $wire.on('stopScanner', () => {
             html5QrCode.stop();
         });
 
-        $wire.on('resumeCamera', () => {
-            setTimeout(()=> {
-                html5QrCode.resume();
-                $wire.dispatch('removeResult');
-            }
-            ,3000);
+        $wire.on('resumeScanner', () => {
+            html5QrCode.resume();
+            $wire.dispatch('removeResult');
         });
 
-        $wire.on('startCamera', (cameraId) => {
+        $wire.on('startScanner', (cameraId) => {
             html5QrCode.start(
                 cameraId[0],     // retreived in the previous step.
                 {
