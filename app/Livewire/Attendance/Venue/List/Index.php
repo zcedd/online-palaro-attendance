@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Attendance\Venue;
+namespace App\Livewire\Attendance\Venue\List;
 
 use App\Models\Venue;
 use Livewire\Component;
@@ -17,6 +17,6 @@ class Index extends Component
             $query->where('name', 'Competition venue');
         })->get();
 
-        return view('livewire.attendance.venue.index');
+        return view('livewire.attendance.venue.list.index');
     }
 }

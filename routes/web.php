@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
  */
 use App\Livewire\Dashboard\Index as Dashboard;
 use App\Livewire\Attendance\Venue\Option\Index as VenueOption;
-use App\Livewire\Attendance\Venue\Index as VenueList;
+use App\Livewire\Attendance\Venue\List\Index as VenueList;
 use App\Livewire\Administrator\Users\Index as SuperAdminUsers;
 use App\Livewire\Attendance\Passageway\Index as PassagewayAttendance;
 use App\Livewire\Attendance\Report\Index as AttendanceReport;
