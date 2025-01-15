@@ -18,4 +18,9 @@ class Attendance extends Model
         'gps_latitude',
         'gps_longitude',
     ];
+
+    public function venue()
+    {
+        return $this->belongsTo(Venue::class);
+    }
 }
