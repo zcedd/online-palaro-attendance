@@ -39,7 +39,7 @@ Route::middleware([
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
 
     Route::get('/attendance/passageway/{venueId}', PassagewayAttendance::class)->name('attendance.passageway');
-    Route::get('/attendance/venue', VenueAttendance::class)->name('attendance.scanner');
+    Route::get('/attendance/venue', VenueAttendance::class)->name('attendance.venue');
 });
 
 

@@ -2,7 +2,7 @@
 
 @php
 $classes = ($active ?? false)
-? 'nav-link active fw-bold'
+? 'nav-link active text-decoration-underline'
 : 'nav-link';
 @endphp
 
