@@ -6,10 +6,10 @@ use Illuminate\Support\Facades\Route;
 /*
  * Super Administrator Account
  */
-use App\Livewire\Attendance\Passageway\Index as PassagewayAttendance;
+use App\Livewire\Attendance\Venue\Index as VenueAttendance;
 use App\Livewire\Dashboard\Index as Dashboard;
-use App\Livewire\Attendance\Scanner\Index as Scanner;
 use App\Livewire\Administrator\Users\Index as SuperAdminUsers;
+use App\Livewire\Attendance\Passageway\Index as PassagewayAttendance;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +37,9 @@ Route::middleware([
 ])->group(function () {
     Route::get('/administrator/users', SuperAdminUsers::class)->name('dashboards');
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
+
     Route::get('/attendance/passageway/{venueId}', PassagewayAttendance::class)->name('attendance.passageway');
+    Route::get('/attendance/venue', VenueAttendance::class)->name('attendance.scanner');
 });
 
 

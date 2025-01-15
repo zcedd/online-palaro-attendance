@@ -1,11 +1,12 @@
 <div>
-    <div class="row justify-content-center align-items-center g-2">
+    <div class="row g-2">
         <div class="col-12 col-md-4">
             <livewire:attendance.scanner.index @qrScanned="onScanned" />
         </div>
         <div class="col-12 col-md-8">
+            <h2 class="text-center">Welcome to {{ $venue->name }}</h2>
             @if ($delegate)
-            <div class="card">
+            <div class="card h-100 ">
                 <div class="card-header">
                     Delegate Information
                 </div>
@@ -20,7 +21,7 @@
             </div>
             @else
             <div class="text-center">
-                <h4>Delegate not found</h4>
+                <p>Delegate not found</p>
             </div>
             @endif
         </div>
