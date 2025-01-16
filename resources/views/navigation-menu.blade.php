@@ -16,6 +16,10 @@
                     {{ __('Dashboard') }}
                 </x-nav-link>
 
+                <x-nav-link href="{{ route('delegation.registration') }}" :active="request()->routeIs('delegation.*')">
+                    {{ __('Delegation') }}
+                </x-nav-link>
+
                 <x-nav-link href="{{ route('attendance.venue') }}" :active="request()->routeIs('attendance.*')">
                     {{ __('Attendance') }}
                 </x-nav-link>
