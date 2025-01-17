@@ -16,6 +16,7 @@ class Delegate extends Model
 
     protected $fillable = [
         'delegation_id',
+        'delegation_team_id',
         'first_name',
         'middle_name',
         'last_name',
@@ -26,6 +27,7 @@ class Delegate extends Model
         'email',
         'profile_photo_path',
         'address',
+        'sport_id',
     ];
 
     public function delegation(): BelongsTo

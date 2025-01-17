@@ -27,3 +27,34 @@ h6 {
     font-family: "Bebas Neue", sans-serif;
     letter-spacing: 0.1em;
 }
+
+.offcanvas {
+    width: 100% !important;
+    @media (min-width: 576px) {
+    }
+
+    // Medium devices (tablets, 768px and up)
+    @media (min-width: 768px) {
+    }
+
+    // Large devices (desktops, 992px and up)
+    @media (min-width: 992px) {
+        width: 75% !important;
+    }
+
+    // X-Large devices (large desktops, 1200px and up)
+    @media (min-width: 1200px) {
+        width: 35% !important;
+    }
+
+    // XX-Large devices (larger desktops, 1400px and up)
+    @media (min-width: 1400px) {
+        //width:75% !important;
+    }
+}
+
+//required asterisk
+.required:after {
+    content: " *";
+    color: red;
+}

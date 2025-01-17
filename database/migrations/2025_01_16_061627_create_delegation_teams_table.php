@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('delegation_teams', function (Blueprint $table) {
             $table->id();
             $table->foreignId('delegation_id')->constrained('delegations');
+            $table->foreignId('user_id')->constrained('users');
             $table->string('contact_person');
             $table->string('contact_number');
             $table->string('contact_email');

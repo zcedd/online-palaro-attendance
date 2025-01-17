@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('email')->nullable()->unique();
             $table->string('profile_photo_path')->nullable();
             $table->string('address');
+            $table->foreignId('sport_id')->nullable()->constrained('sports');
             $table->timestamps();
             $table->softDeletes();
         });

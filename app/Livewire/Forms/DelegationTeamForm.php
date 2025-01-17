@@ -18,6 +18,8 @@ class DelegationTeamForm extends Form
 
     public ?string $contact_email;
 
+    public ?DelegationTeam $existingForm;
+
     public function rules()
     {
         return [
@@ -43,6 +45,16 @@ class DelegationTeamForm extends Form
     {
         $this->validate();
         DelegationTeam::create($this->all());
-        $this->reset();
+    }
+
+    public function getExistingForm($id)
+    {
+        $this->existingForm = DelegationTeam::find($id);
+        $this->fill($this->existingForm);
+    }
+
+    public function update()
+    {
+        $this->existingForm->update($this->all());
     }
 }

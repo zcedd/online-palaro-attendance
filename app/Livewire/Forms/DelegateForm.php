@@ -30,20 +30,23 @@ class DelegateForm extends Form
 
     public ?string $address;
 
+    public ?int $sport_id;
+
     public function rules()
     {
         return [
-            'delegation_id' => 'required',
-            'first_name' => 'required',
+            'delegation_id' => 'required|integer',
+            'first_name' => 'required|string|max:255',
             'middle_name' => 'nullable',
-            'last_name' => 'required',
-            'suffix' => 'required',
-            'gender' => 'required',
+            'last_name' => 'required|string|max:255',
+            'suffix' => 'nullable',
+            'gender' => 'required|string|max:255',
             'birthday' => 'required',
             'contact_number' => 'required',
             'email' => 'required|unique:delegates, email',
             'profile_photo_path' => 'required',
             'address' => 'required',
+            'sport_id' => 'nullable'
         ];
     }
 
@@ -54,11 +57,14 @@ class DelegateForm extends Form
 
     public function validationAttributes(): array
     {
-        return [];
+        return [
+            'sport_id' => 'sport'
+        ];
     }
 
     public function create()
     {
+        dd($this->all());
         $this->validate();
         Delegate::create($this->all());
         $this->reset();
