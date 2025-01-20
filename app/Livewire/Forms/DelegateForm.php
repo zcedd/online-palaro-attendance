@@ -26,6 +26,8 @@ class DelegateForm extends Form
 
     public ?string $email;
 
+    public ?string $profile_photo;
+
     public ?string $profile_photo_path;
 
     public ?string $address;
@@ -44,9 +46,10 @@ class DelegateForm extends Form
             'birthday' => 'required',
             'contact_number' => 'required',
             'email' => 'required|unique:delegates, email',
-            'profile_photo_path' => 'required',
             'address' => 'required',
-            'sport_id' => 'nullable'
+            'sport_id' => 'nullable',
+            'profile_photo_path' => 'nullable',
+            'profile_photo' => 'nullable|image'
         ];
     }
 

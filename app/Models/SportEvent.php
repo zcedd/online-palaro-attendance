@@ -12,6 +12,7 @@ class SportEvent extends Model
     protected $fillable = [
         'sport_id',
         'sport_category_id',
+        'sport_division_id',
         'name',
     ];
 }

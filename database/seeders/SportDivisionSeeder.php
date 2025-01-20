@@ -6,18 +6,18 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class SportCategorySeeder extends Seeder
+class SportDivisionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $sportCategory = [
+        $sportDivision = [
             ['name' => 'Primary'],
             ['name' => 'Secondary']
         ];
 
-        DB::table('sport_categories')->insert($sportCategory);
+        DB::table('sport_divisions')->insert($sportDivision);
     }
 }

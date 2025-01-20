@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sport_events', function (Blueprint $table) {
             $table->id();
             $table->foreignId('sport_id')->constrained('sports');
-            $table->foreignId('sport_category_id')->constrained('sport_categories');
+            $table->foreignId('sport_division_id')->nullable()->constrained('sport_divisions');
             $table->string('name');
             $table->timestamps();
             $table->softDeletes();
