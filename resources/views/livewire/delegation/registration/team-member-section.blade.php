@@ -76,6 +76,17 @@
                         <x-input-error for="delegateForm.gender" />
                     </x-form-panel-vertical>
                 </div>
+                <div class="col">
+                    <x-form-panel-vertical>
+                        <x-slot name="label">
+                            <x-label for="profile-photo" class="form-label required">Profile photo</x-label>
+                        </x-slot>
+                        <x-input type="file"
+                            class="{{ $errors->has('delegateForm.profile_photo') ? 'is-invalid' : '' }}"
+                            id="profile-photo" wire:model="delegateForm.profile_photo" />
+                        <x-input-error for="delegateForm.profile_photo" />
+                    </x-form-panel-vertical>
+                </div>
             </div>
             <x-form-panel-vertical>
                 <x-slot name="label">
@@ -115,12 +126,11 @@
                 <div class="col">
                     <x-form-panel-vertical>
                         <x-slot name="label">
-                            <x-label for="contact-email" class="form-label required">Contact Email</x-label>
+                            <x-label for="email" class="form-label required">Contact Email</x-label>
                         </x-slot>
-                        <x-input type="text"
-                            class="{{ $errors->has('delegateForm.contact_email') ? 'is-invalid' : '' }}"
-                            id="contact-email" wire:model="delegateForm.contact_email" />
-                        <x-input-error for="delegateForm.contact_email" />
+                        <x-input type="text" class="{{ $errors->has('delegateForm.email') ? 'is-invalid' : '' }}"
+                            id="email" wire:model="delegateForm.email" />
+                        <x-input-error for="delegateForm.email" />
                     </x-form-panel-vertical>
                 </div>
             </div>

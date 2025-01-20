@@ -2,13 +2,18 @@
 
 namespace App\Livewire\Forms;
 
-use App\Models\Delegate;
-use Livewire\Attributes\Validate;
 use Livewire\Form;
+use App\Models\Delegate;
+use Livewire\WithFileUploads;
+use Livewire\Attributes\Validate;
 
 class DelegateForm extends Form
 {
+    use WithFileUploads;
+
     public ?int $delegation_id;
+
+    public ?int $delegation_team_id;
 
     public ?string $first_name;
 
@@ -22,11 +27,11 @@ class DelegateForm extends Form
 
     public ?string $birthday;
 
-    public ?int $contact_number;
+    public ?string $contact_number;
 
     public ?string $email;
 
-    public ?string $profile_photo;
+    public $profile_photo;
 
     public ?string $profile_photo_path;
 
@@ -38,6 +43,7 @@ class DelegateForm extends Form
     {
         return [
             'delegation_id' => 'required|integer',
+            'delegation_team_id' => 'required|integer',
             'first_name' => 'required|string|max:255',
             'middle_name' => 'nullable',
             'last_name' => 'required|string|max:255',
@@ -45,11 +51,11 @@ class DelegateForm extends Form
             'gender' => 'required|string|max:255',
             'birthday' => 'required',
             'contact_number' => 'required',
-            'email' => 'required|unique:delegates, email',
+            'email' => 'nullable',
             'address' => 'required',
             'sport_id' => 'nullable',
             'profile_photo_path' => 'nullable',
-            'profile_photo' => 'nullable|image'
+            'profile_photo' => 'required|image'
         ];
     }
 
@@ -67,9 +73,17 @@ class DelegateForm extends Form
 
     public function create()
     {
-        dd($this->all());
         $this->validate();
-        Delegate::create($this->all());
+        $delegate = Delegate::create($this->all());
+        $this->updatePhoto($delegate);
         $this->reset();
+    }
+
+    public function updatePhoto(Delegate $delegate)
+    {
+        if ($this->profile_photo) {
+            $this->profile_photo_path = $this->profile_photo->store($delegate->id, 'delegate-profile-photo');
+        }
+        $delegate->update(['profile_photo_path' => $this->profile_photo_path]);
     }
 }

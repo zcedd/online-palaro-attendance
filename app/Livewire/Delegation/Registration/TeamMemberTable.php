@@ -51,7 +51,7 @@ final class TeamMemberTable extends PowerGridComponent
             ->add('birthday_formatted', fn(Delegate $model) => Carbon::parse($model->birthday)->format('d/m/Y'))
             ->add('contact_number')
             ->add('email')
-            ->add('profile_photo_path')
+            ->add('profile_photo_path', fn(Delegate $model) => $model->profile_photo_path ? '<img src="' . asset('storage/delegate/photo/' . $model->profile_photo_path) . '" alt="" width="80px" height="80px" >' : '')
             ->add('address');
     }
 
@@ -89,9 +89,7 @@ final class TeamMemberTable extends PowerGridComponent
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Profile photo path', 'profile_photo_path')
-                ->sortable()
-                ->searchable(),
+            Column::make('Profile photo', 'profile_photo_path'),
 
             Column::make('Address', 'address')
                 ->sortable()

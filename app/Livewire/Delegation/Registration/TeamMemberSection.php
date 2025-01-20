@@ -5,11 +5,16 @@ namespace App\Livewire\Delegation\Registration;
 use App\Models\Sport;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\WithFileUploads;
 use Livewire\Attributes\Computed;
 use App\Livewire\Forms\DelegateForm;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Auth;
 
 class TeamMemberSection extends Component
 {
+    use WithFileUploads;
+
     public DelegateForm $delegateForm;
 
     public bool $addTeamMemberOffcanvas = false;
@@ -25,7 +30,16 @@ class TeamMemberSection extends Component
 
     public function addTeamMember()
     {
-        $this->delegateForm->create();
+        try {
+            $this->delegateForm->delegation_id = Auth::user()->delegation_id;
+            $this->delegateForm->delegation_team_id = Auth::user()->delegationTeam->id;
+            $this->delegateForm->create();
+        } catch (QueryException $qe) {
+            dd($qe);
+        }
+        // catch (\Throwable $th) {
+        //     dd($th);
+        // }
     }
 
     #[Computed(persist: true)]
