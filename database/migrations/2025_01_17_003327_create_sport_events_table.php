@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('sport_id')->constrained('sports');
             $table->foreignId('sport_division_id')->nullable()->constrained('sport_divisions');
+            $table->string('category')->nullable();
             $table->string('name');
             $table->timestamps();
             $table->softDeletes();

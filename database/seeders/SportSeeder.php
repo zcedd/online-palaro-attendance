@@ -25,43 +25,8 @@ class SportSeeder extends Seeder
                 'venue_id' => 1,
             ],
             [
-                'name' => 'Cheerdancing',
-                'sport_discipline_id' => 2,
-                'venue_id' => 1,
-            ],
-            [
-                'name' => 'Esports',
-                'sport_discipline_id' => 2,
-                'venue_id' => 1,
-            ],
-            [
-                'name' => 'Traditional games',
-                'sport_discipline_id' => 2,
-                'venue_id' => 1,
-            ],
-            [
                 'name' => 'Weightlifting',
                 'sport_discipline_id' => 2,
-                'venue_id' => 1,
-            ],
-            [
-                'name' => 'Athletics',
-                'sport_discipline_id' => 3,
-                'venue_id' => 1,
-            ],
-            [
-                'name' => 'Bocce',
-                'sport_discipline_id' => 3,
-                'venue_id' => 1,
-            ],
-            [
-                'name' => 'Goalball',
-                'sport_discipline_id' => 3,
-                'venue_id' => 1,
-            ],
-            [
-                'name' => 'Swimming',
-                'sport_discipline_id' => 3,
                 'venue_id' => 1,
             ],
             [

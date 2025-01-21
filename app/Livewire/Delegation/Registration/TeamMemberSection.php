@@ -4,12 +4,13 @@ namespace App\Livewire\Delegation\Registration;
 
 use App\Models\Sport;
 use Livewire\Component;
+use App\Models\SportEvent;
 use Livewire\Attributes\On;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Computed;
 use App\Livewire\Forms\DelegateForm;
-use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\QueryException;
 
 class TeamMemberSection extends Component
 {
@@ -20,6 +21,8 @@ class TeamMemberSection extends Component
     public bool $addTeamMemberOffcanvas = false;
 
     public ?string $formAction;
+
+    public $sportEvents = [];
 
     #[On('addTeamMemberOffcanvas')]
     public function addTeamMemberOffcanvas()
@@ -46,6 +49,11 @@ class TeamMemberSection extends Component
     public function sports()
     {
         return Sport::all();
+    }
+
+    public function getSportEvents()
+    {
+        $this->sportEvents = SportEvent::where('sport_id', $this->delegateForm->sport_id)->get();
     }
 
     public function render()

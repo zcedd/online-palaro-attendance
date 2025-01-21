@@ -14,8 +14,9 @@ class SportDivisionSeeder extends Seeder
     public function run(): void
     {
         $sportDivision = [
-            ['name' => 'Primary'],
-            ['name' => 'Secondary']
+            ['name' => 'Elementary'],
+            ['name' => 'Secondary'],
+            ['name' => 'Special Categories (PWD athletes)'],
         ];
 
         DB::table('sport_divisions')->insert($sportDivision);

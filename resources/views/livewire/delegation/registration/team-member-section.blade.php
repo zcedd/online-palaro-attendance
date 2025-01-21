@@ -88,19 +88,41 @@
                     </x-form-panel-vertical>
                 </div>
             </div>
-            <x-form-panel-vertical>
-                <x-slot name="label">
-                    <x-label for="sport" class="form-label required">Sport</x-label>
-                </x-slot>
-                <x-select class="{{ $errors->has('delegateForm.sport_id') ? 'is-invalid' : '' }}" id="sport"
-                    wire:model.live="delegateForm.sport_id">
-                    <option selected></option>
-                    @foreach ($this->sports as $sport)
-                    <option value="{{$sport->id}}">{{$sport->name}}</option>
-                    @endforeach
-                </x-select>
-                <x-input-error for="delegateForm.sport_id" />
-            </x-form-panel-vertical>
+            <div class="row g-2">
+                <div class="col">
+                    <x-form-panel-vertical>
+                        <x-slot name="label">
+                            <x-label for="sport" class="form-label required">Sport</x-label>
+                        </x-slot>
+                        <x-select class="{{ $errors->has('delegateForm.sport_id') ? 'is-invalid' : '' }}" id="sport"
+                            wire:model.live="delegateForm.sport_id" wire:change="getSportEvents">
+                            <option selected></option>
+                            @foreach ($this->sports as $sport)
+                            <option value="{{$sport->id}}">{{$sport->name}}</option>
+                            @endforeach
+                        </x-select>
+                        <x-input-error for="delegateForm.sport_id" />
+                    </x-form-panel-vertical>
+                </div>
+                <div class="col">
+                    <x-form-panel-vertical>
+                        <x-slot name="label">
+                            <x-label for="sport-event" class="form-label required">Sport event</x-label>
+                        </x-slot>
+                        <x-select class="{{ $errors->has('delegateForm.sport_event_id') ? 'is-invalid' : '' }}"
+                            id="sport-event" wire:model.live="delegateForm.sport_event_id">
+                            <option selected></option>
+                            @forelse ($sportEvents as $sportEvent)
+                            <option value="{{$sportEvent->id}}">{{$sportEvent->name}}</option>
+                            @empty
+                            <option>Select sport first</option>
+                            @endforelse
+                        </x-select>
+                        <x-input-error for="delegateForm.sport_event_id" />
+                    </x-form-panel-vertical>
+                </div>
+            </div>
+
             <h4 class="text-muted">Address Details</h4>
             <x-form-panel-vertical>
                 <x-slot name="label">
