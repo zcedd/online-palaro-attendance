@@ -37,7 +37,7 @@ class DelegateForm extends Form
 
     public ?string $address;
 
-    public ?int $sport_id;
+    public ?int $sport_id = null;
 
     public array $sport_event_id = [];
 
@@ -77,6 +77,7 @@ class DelegateForm extends Form
 
     public function create()
     {
+        dd($this->all());
         $this->validate();
         $delegate = Delegate::create($this->all());
         $this->attachPhoto($delegate);
@@ -86,13 +87,17 @@ class DelegateForm extends Form
 
     public function getExistingForm($id)
     {
-        $this->existingForm = Delegate::find($id);
+        $this->existingForm = Delegate::with('sportEvent')->find($id);
         $this->fill($this->existingForm);
+        $this->sport_event_id = $this->existingForm->sportEvent->pluck('id')->toArray();
     }
 
     public function update()
     {
+        dd($this->all());
         $this->existingForm->update($this->all());
+        $this->attachPhoto($this->existingForm);
+        $this->attachSportEvent($this->existingForm);
     }
 
     public function delete()

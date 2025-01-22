@@ -103,16 +103,17 @@
                 <x-input-error for="delegateForm.sport_id" />
             </x-form-panel-vertical>
             @foreach($delegateForm->sport_event_id as $key=>$sportEventId)
-            <x-form-panel-vertical>
-                <div class="row g-2">
-                    <div class="col-10">
+            <div class="row g-2">
+                <div class="col-10">
+                    <x-form-panel-vertical>
                         <x-slot name="label">
                             <x-label for="sport-event-{{ $key }}" class="form-label required">Sport event</x-label>
                         </x-slot>
                         <x-select class="{{ $errors->has('delegateForm.sport_event_id') ? 'is-invalid' : '' }}"
                             id="sport-event-{{ $key }}" wire:model.live="delegateForm.sport_event_id.{{ $key }}">
                             <option selected></option>
-                            @forelse ($sportEvents as $sportEvent)
+                            @if ($this->delegateForm->sport_id)
+                            @forelse ($this->sportEvents->where('sport_id', $delegateForm->sport_id) as $sportEvent)
                             <option value="{{$sportEvent->id}}">
                                 {{ $sportEvent->category . " : " . $sportEvent->name }}
                                 {{ $sportEvent->subcategory ? " - " . $sportEvent->subcategory : "" }}
@@ -120,15 +121,16 @@
                             @empty
                             <option>Select sport first</option>
                             @endforelse
+                            @endif
                         </x-select>
                         <x-input-error for="delegateForm.sport_event_id" />
-                    </div>
-                    <div class="col-2">
-                        <x-button type="button" id="remove-sport-event-{{ $key }}"
-                            wire:click="removeSportEvent({{ $key }})" class="form-control btn-danger">Remove</x-button>
-                    </div>
+                    </x-form-panel-vertical>
                 </div>
-            </x-form-panel-vertical>
+                <div class="col-2">
+                    <x-button type="button" id="remove-sport-event-{{ $key }}" wire:click="removeSportEvent({{ $key }})"
+                        class="form-control btn-danger">Remove</x-button>
+                </div>
+            </div>
             @endforeach
             <x-button type="button" wire:click="addSportEvent" class="form-control btn-primary">Add Sport Event
             </x-button>

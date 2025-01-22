@@ -22,8 +22,6 @@ class TeamMemberSection extends Component
 
     public ?string $formAction;
 
-    public $sportEvents = [];
-
     #[On('addTeamMemberOffcanvas')]
     public function addTeamMemberOffcanvas()
     {
@@ -48,9 +46,10 @@ class TeamMemberSection extends Component
     #[On('updateTeamMemberOffcanvas')]
     public function updateTeamMemberOffcanvas($rowId)
     {
-        $this->teamMemberOffcanvas = true;
         $this->formAction = 'updateTeamMember';
         $this->delegateForm->getExistingForm($rowId);
+        $this->getSportEvents();
+        $this->teamMemberOffcanvas = true;
     }
 
     public function updateTeamMember()
@@ -89,15 +88,21 @@ class TeamMemberSection extends Component
         unset($this->delegateForm->sport_event_id[$arrayKey]);
     }
 
+    public function getSportEvents()
+    {
+        $this->sportEventFiltered = $this->sportEvents->where('sport_id', $this->delegateForm->sport_id);
+    }
+
     #[Computed(persist: true)]
     public function sports()
     {
         return Sport::all();
     }
 
-    public function getSportEvents()
+    #[Computed(persist: true)]
+    public function sportEvents()
     {
-        $this->sportEvents = SportEvent::where('sport_id', $this->delegateForm->sport_id)->get();
+        return SportEvent::all();
     }
 
     public function render()
