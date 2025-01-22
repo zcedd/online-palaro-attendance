@@ -16,6 +16,10 @@ class DelegationTypeSeeder extends Seeder
         $delegateType = [
             ['name' => 'Regional'],
             ['name' => 'Technical Official'],
+            ['name' => 'Media'],
+            ['name' => 'VIP'],
+            ['name' => 'Guest'],
+            ['name' => 'Observer'],
         ];
 
         DB::table('delegation_types')->insert($delegateType);

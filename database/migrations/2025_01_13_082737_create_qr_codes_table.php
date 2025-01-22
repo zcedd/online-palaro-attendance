@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('qr_codes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('delegate_id')->constrained('delegates');
-            $table->string('qr_code_data');
+            $table->string('qr_code_data')->unique();
             $table->timestamps();
             $table->softDeletes();
         });

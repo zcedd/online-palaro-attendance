@@ -6,8 +6,15 @@ use Illuminate\Support\Facades\Route;
 /*
  * Super Administrator Account
  */
-use App\Livewire\Administrator\Users\Index as SuperAdminUsers;
 use App\Livewire\Dashboard\Index as Dashboard;
+use App\Livewire\Administrator\Users\Index as SuperAdminUsers;
+
+use App\Livewire\Attendance\Venue\List\Index as VenueList;
+use App\Livewire\Attendance\Venue\Option\Index as VenueOption;
+use App\Livewire\Attendance\Report\Index as AttendanceReport;
+use App\Livewire\Attendance\Passageway\Index as PassagewayAttendance;
+
+use App\Livewire\Delegation\Registration\Index as DelegationRegistration;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +42,13 @@ Route::middleware([
 ])->group(function () {
     Route::get('/administrator/users', SuperAdminUsers::class)->name('dashboards');
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
+
+    Route::get('/attendance/venue', VenueList::class)->name('attendance.venue');
+    Route::get('/attendance/venue/{venueId}/option', VenueOption::class)->name('attendance.venue.option');
+    Route::get('/attendance/venue/{venueId}/passageway', PassagewayAttendance::class)->name('attendance.passageway');
+    Route::get('/attendance/venue/{venueId}/report', AttendanceReport::class)->name('attendance.report');
+
+    Route::get('/delegation/registration', DelegationRegistration::class)->name('delegation.registration');
 });
 
 

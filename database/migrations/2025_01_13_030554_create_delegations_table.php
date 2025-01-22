@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('delegation_type_id')->constrained('delegation_types');
             $table->foreignId('venue_id')->constrained('venues');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

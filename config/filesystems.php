@@ -36,10 +36,22 @@ return [
             'throw' => false,
         ],
 
+        'delegate-profile-photo' => [
+            'driver' => 'local',
+            'root' => storage_path('app/delegate/photo'),
+            'throw' => false,
+        ],
+
+        'delegate-qr-image' => [
+            'driver' => 'local',
+            'root' => storage_path('app/delegate/qr-image'),
+            'throw' => false,
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
             'throw' => false,
         ],
@@ -71,6 +83,7 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+        public_path('storage/delegate') => storage_path('app/delegate'),
     ],
 
 ];

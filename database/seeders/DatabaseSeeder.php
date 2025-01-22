@@ -22,9 +22,12 @@ class DatabaseSeeder extends Seeder
         $this->call(VenueSeeder::class);
         $this->call(DelegationTypeSeeder::class);
         $this->call(DelegationSeeder::class);
+        $this->call(UserSeeder::class);
         $this->call(DelegationRoleSeeder::class);
         $this->call(SportDisciplineSeeder::class);
         $this->call(SportSeeder::class);
         $this->call(AttendanceTypeSeeder::class);
+        $this->call(SportDivisionSeeder::class);
+        $this->call(SportEventSeeder::class);
     }
 }
