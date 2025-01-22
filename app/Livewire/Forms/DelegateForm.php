@@ -39,6 +39,10 @@ class DelegateForm extends Form
 
     public ?int $sport_id;
 
+    public array $sport_event_id = [];
+
+    public ?Delegate $existingForm;
+
     public function rules()
     {
         return [
@@ -75,15 +79,37 @@ class DelegateForm extends Form
     {
         $this->validate();
         $delegate = Delegate::create($this->all());
-        $this->updatePhoto($delegate);
+        $this->attachPhoto($delegate);
+        $this->attachSportEvent($delegate);
         $this->reset();
     }
 
-    public function updatePhoto(Delegate $delegate)
+    public function getExistingForm($id)
+    {
+        $this->existingForm = Delegate::find($id);
+        $this->fill($this->existingForm);
+    }
+
+    public function update()
+    {
+        $this->existingForm->update($this->all());
+    }
+
+    public function delete()
+    {
+        $this->existingForm->delete();
+    }
+
+    public function attachPhoto(Delegate $delegate)
     {
         if ($this->profile_photo) {
             $this->profile_photo_path = $this->profile_photo->store($delegate->id, 'delegate-profile-photo');
         }
         $delegate->update(['profile_photo_path' => $this->profile_photo_path]);
+    }
+
+    private function attachSportEvent(Delegate $delegate)
+    {
+        $delegate->sportEvent()->attach($this->sport_event_id);
     }
 }

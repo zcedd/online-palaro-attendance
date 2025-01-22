@@ -44,4 +44,9 @@ class Delegate extends Model
     {
         return $this->hasMany(QrCode::class);
     }
+
+    public function sportEvent(): BelongsToMany
+    {
+        return $this->belongsToMany(SportEvent::class);
+    }
 }

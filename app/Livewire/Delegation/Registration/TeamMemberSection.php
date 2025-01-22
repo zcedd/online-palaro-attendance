@@ -18,7 +18,7 @@ class TeamMemberSection extends Component
 
     public DelegateForm $delegateForm;
 
-    public bool $addTeamMemberOffcanvas = false;
+    public bool $teamMemberOffcanvas = false;
 
     public ?string $formAction;
 
@@ -27,7 +27,7 @@ class TeamMemberSection extends Component
     #[On('addTeamMemberOffcanvas')]
     public function addTeamMemberOffcanvas()
     {
-        $this->addTeamMemberOffcanvas = true;
+        $this->teamMemberOffcanvas = true;
         $this->formAction = 'addTeamMember';
     }
 
@@ -43,6 +43,50 @@ class TeamMemberSection extends Component
         // catch (\Throwable $th) {
         //     dd($th);
         // }
+    }
+
+    #[On('updateTeamMemberOffcanvas')]
+    public function updateTeamMemberOffcanvas($rowId)
+    {
+        $this->teamMemberOffcanvas = true;
+        $this->formAction = 'updateTeamMember';
+        $this->delegateForm->getExistingForm($rowId);
+    }
+
+    public function updateTeamMember()
+    {
+        try {
+            $this->delegateForm->update();
+        } catch (QueryException $qe) {
+            dd($qe);
+        }
+    }
+
+    #[On('deleteTeamMemberOffcanvas')]
+    public function deleteTeamMemberOffcanvas($id)
+    {
+        $this->teamMemberOffcanvas = true;
+        $this->formAction = 'updateTeamMember';
+        $this->delegateForm->getExistingForm($id);
+    }
+
+    public function deleteTeamMember()
+    {
+        try {
+            $this->delegateForm->delete();
+        } catch (QueryException $qe) {
+            dd($qe);
+        }
+    }
+
+    public function addSportEvent(): void
+    {
+        $this->delegateForm->sport_event_id[] = '';
+    }
+
+    public function removeSportEvent($arrayKey): void
+    {
+        unset($this->delegateForm->sport_event_id[$arrayKey]);
     }
 
     #[Computed(persist: true)]
