@@ -44,7 +44,8 @@ class DelegationTeamForm extends Form
     public function create()
     {
         $this->validate();
-        DelegationTeam::create($this->all());
+        $existingForm = DelegationTeam::create($this->all());
+        $this->existingForm = $existingForm;
     }
 
     public function getExistingForm($id)

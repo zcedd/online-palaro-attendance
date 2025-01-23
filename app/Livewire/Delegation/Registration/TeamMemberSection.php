@@ -88,11 +88,6 @@ class TeamMemberSection extends Component
         unset($this->delegateForm->sport_event_id[$arrayKey]);
     }
 
-    public function getSportEvents()
-    {
-        $this->sportEventFiltered = $this->sportEvents->where('sport_id', $this->delegateForm->sport_id);
-    }
-
     #[Computed(persist: true)]
     public function sports()
     {

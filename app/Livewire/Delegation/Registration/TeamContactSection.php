@@ -21,6 +21,7 @@ class TeamContactSection extends Component
         $this->form->delegation_id = $this->user->delegation_id;
         $this->form->user_id = $this->user->id;
         $this->form->create();
+        $this->dispatch('savedEmergencyContact');
     }
 
     public function updateDelegationTeam()
@@ -28,6 +29,7 @@ class TeamContactSection extends Component
         $this->form->delegation_id = $this->user->delegation_id;
         $this->form->user_id = $this->user->id;
         $this->form->update();
+        $this->dispatch('savedEmergencyContact');
     }
 
     public function mount()
