@@ -39,7 +39,9 @@ class DelegateForm extends Form
 
     public ?int $sport_id = null;
 
-    public array $sport_event_id = [];
+    public array $sport_event_id = [''];
+
+    public array $delegation_role_id = [''];
 
     public ?Delegate $existingForm;
 
@@ -59,7 +61,9 @@ class DelegateForm extends Form
             'address' => 'required',
             'sport_id' => 'nullable',
             'profile_photo_path' => 'nullable',
-            'profile_photo' => 'nullable|image'
+            'profile_photo' => 'nullable|image',
+            'delegation_role_id.*' => 'required',
+            'sport_event_id.*' => 'required',
         ];
     }
 
@@ -71,7 +75,9 @@ class DelegateForm extends Form
     public function validationAttributes(): array
     {
         return [
-            'sport_id' => 'sport'
+            'sport_id' => 'sport',
+            'delegation_role_id.*' => 'role',
+            'sport_event_id.*' => 'sport event',
         ];
     }
 
@@ -80,7 +86,8 @@ class DelegateForm extends Form
         $this->validate();
         $delegate = Delegate::create($this->all());
         $this->attachPhoto($delegate);
-        $this->attachSportEvent($delegate);
+        $this->syncSportEvent($delegate);
+        $this->syncDelegationRole($delegate);
         $this->reset();
     }
 
@@ -89,6 +96,7 @@ class DelegateForm extends Form
         $this->existingForm = Delegate::with('sportEvent')->find($id);
         $this->fill($this->existingForm);
         $this->sport_event_id = $this->existingForm->sportEvent->pluck('id')->toArray();
+        $this->delegation_role_id = $this->existingForm->delegationRole->pluck('id')->toArray();
     }
 
     public function update()
@@ -96,7 +104,8 @@ class DelegateForm extends Form
         $this->validate();
         $this->existingForm->update($this->all());
         $this->attachPhoto($this->existingForm);
-        $this->attachSportEvent($this->existingForm);
+        $this->syncSportEvent($this->existingForm);
+        $this->syncDelegationRole($this->existingForm);
     }
 
     public function delete()
@@ -112,8 +121,13 @@ class DelegateForm extends Form
         }
     }
 
-    private function attachSportEvent(Delegate $delegate)
+    private function syncSportEvent(Delegate $delegate)
     {
-        $delegate->sportEvent()->attach($this->sport_event_id);
+        $delegate->sportEvent()->sync($this->sport_event_id);
+    }
+
+    private function syncDelegationRole(Delegate $delegate)
+    {
+        $delegate->delegationRole()->sync($this->delegation_role_id);
     }
 }

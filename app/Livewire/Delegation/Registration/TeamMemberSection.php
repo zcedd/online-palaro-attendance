@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\SportEvent;
 use Livewire\Attributes\On;
 use Livewire\WithFileUploads;
+use App\Models\DelegationRole;
 use Livewire\Attributes\Computed;
 use App\Livewire\Forms\DelegateForm;
 use Illuminate\Support\Facades\Auth;
@@ -86,6 +87,16 @@ class TeamMemberSection extends Component
         unset($this->delegateForm->sport_event_id[$arrayKey]);
     }
 
+    public function addDelegationRole(): void
+    {
+        $this->delegateForm->delegation_role_id[] = '';
+    }
+
+    public function removeDelegationRole($arrayKey): void
+    {
+        unset($this->delegateForm->delegation_role_id[$arrayKey]);
+    }
+
     #[Computed(persist: true)]
     public function sports()
     {
@@ -96,6 +107,12 @@ class TeamMemberSection extends Component
     public function sportEvents()
     {
         return SportEvent::all();
+    }
+
+    #[Computed(persist: true)]
+    public function delegationRoles()
+    {
+        return DelegationRole::all();
     }
 
     public function render()

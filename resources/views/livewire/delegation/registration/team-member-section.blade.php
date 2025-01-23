@@ -27,7 +27,6 @@
                     <span class="small">
                         Please provide the delegate's personal information.
                     </span>
-
                 </x-slot>
                 <div class="row g-2">
                     <div class="col">
@@ -123,6 +122,49 @@
                         </x-form-panel-vertical>
                     </div>
                 </div>
+
+                <x-section-title class="mt-4">
+                    <x-slot name="title">Delegation Information</x-slot>
+                    <x-slot name="description">
+                        <span class="small">
+                            Please provide the delegate's delegation information.
+                        </span>
+                    </x-slot>
+                </x-section-title>
+                <x-form-panel-vertical>
+                    <x-slot name="label">
+                        <x-label for="delegation-role" class="form-label required">
+                            Role
+                        </x-label>
+                    </x-slot>
+                    @foreach($delegateForm->delegation_role_id as $key=>$delegationRoleId)
+                    <div class="row g-2 mb-3">
+                        <div class="col-10">
+                            <x-select
+                                class="{{ $errors->has('delegateForm.delegation_role_id.'.$key) ? 'is-invalid' : '' }}"
+                                id="delegation-role-{{ $key }}" wire:model="delegateForm.delegation_role_id.{{ $key }}">
+                                <option selected></option>
+                                @foreach ($this->delegationRoles as $role)
+                                <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                @endforeach
+                            </x-select>
+                            <x-input-error for="delegateForm.delegation_role_id.{{ $key }}" />
+                        </div>
+                        <div class="col-2">
+                            <x-button type="button" id="remove-sport-event-{{ $key }}"
+                                wire:click="removeDelegationRole({{ $key }})" class="form-control btn-danger">Remove
+                            </x-button>
+                        </div>
+                    </div>
+                    @endforeach
+                </x-form-panel-vertical>
+                <div class="mb-3">
+                    <x-button type="button" id="add-delegation-role" wire:click="addDelegationRole"
+                        class="form-control btn-primary">
+                        Add Role
+                    </x-button>
+                </div>
+
                 <x-section-title class="mt-4">
                     <x-slot name="title">Sport Information</x-slot>
                     <x-slot name="description">
@@ -144,14 +186,15 @@
                     </x-select>
                     <x-input-error for="delegateForm.sport_id" />
                 </x-form-panel-vertical>
-                @foreach($delegateForm->sport_event_id as $key=>$sportEventId)
                 <x-form-panel-vertical>
-                    <div class="row g-2">
+                    <x-slot name="label">
+                        <x-label for="sport-event" class="form-label required">Sport event</x-label>
+                    </x-slot>
+                    @foreach($delegateForm->sport_event_id as $key=>$sportEventId)
+                    <div class="row g-2 mb-3">
                         <div class="col-10">
-                            <x-slot name="label">
-                                <x-label for="sport-event-{{ $key }}" class="form-label required">Sport event</x-label>
-                            </x-slot>
-                            <x-select class="{{ $errors->has('delegateForm.sport_event_id') ? 'is-invalid' : '' }}"
+                            <x-select
+                                class="{{ $errors->has('delegateForm.sport_event_id.'.$key) ? 'is-invalid' : '' }}"
                                 id="sport-event-{{ $key }}" wire:model.live="delegateForm.sport_event_id.{{ $key }}">
                                 <option selected></option>
                                 @if ($this->delegateForm->sport_id)
@@ -165,7 +208,7 @@
                                 @endforelse
                                 @endif
                             </x-select>
-                            <x-input-error for="delegateForm.sport_event_id" />
+                            <x-input-error for="delegateForm.sport_event_id.{{ $key }}" />
                         </div>
                         <div class="col-2 align-items-end d-flex">
                             <x-button type="button" id="remove-sport-event-{{ $key }}"
@@ -173,12 +216,13 @@
                             </x-button>
                         </div>
                     </div>
+                    @endforeach
                 </x-form-panel-vertical>
-                @endforeach
                 <div class="mb-3">
-                    <x-button type="button" wire:click="addSportEvent" class="form-control btn-primary">Add Sport Event
+                    <x-button type="button" wire:click="addSportEvent" class="form-control btn-primary">
+                        Add Sport Event
+                    </x-button>
                 </div>
-                </x-button>
                 <x-section-title class="mt-4">
                     <x-slot name="title">Address Information</x-slot>
                     <x-slot name="description">
