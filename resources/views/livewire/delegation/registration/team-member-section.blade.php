@@ -68,8 +68,20 @@
                             <x-slot name="label">
                                 <x-label for="suffix-name" class="form-label">Suffix name</x-label>
                             </x-slot>
-                            <x-input type="text" class="{{ $errors->has('delegateForm.suffix') ? 'is-invalid' : '' }}"
-                                id="suffix-name" wire:model="delegateForm.suffix" />
+                            <x-select class="{{ $errors->has('delegateForm.suffix') ? 'is-invalid' : '' }}" id="suffix"
+                                wire:model.live="delegateForm.suffix">
+                                <option selected></option>
+                                <option value="Sr">Sr.</option>
+                                <option value="Jr">Jr.</option>
+                                <option value="I">I</option>
+                                <option value="II">II</option>
+                                <option value="III">III</option>
+                                <option value="IV">IV</option>
+                                <option value="V">V</option>
+                                <option value="VI">VI</option>
+                                <option value="VII">VII</option>
+                                <option value="VIII">VIII</option>
+                            </x-select>
                             <x-input-error for="delegateForm.suffix" />
                         </x-form-panel-vertical>
                     </div>
@@ -90,8 +102,12 @@
                             <x-slot name="label">
                                 <x-label for="gender" class="form-label required">Gender</x-label>
                             </x-slot>
-                            <x-input type="text" class="{{ $errors->has('delegateForm.gender') ? 'is-invalid' : '' }}"
-                                id="gender" wire:model="delegateForm.gender" />
+                            <x-select class="{{ $errors->has('delegateForm.gender') ? 'is-invalid' : '' }}" id="gender"
+                                wire:model.live="delegateForm.gender">
+                                <option selected></option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </x-select>
                             <x-input-error for="delegateForm.gender" />
                         </x-form-panel-vertical>
                     </div>
