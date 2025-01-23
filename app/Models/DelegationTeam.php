@@ -15,5 +15,8 @@ class DelegationTeam extends Model
         'contact_person',
         'contact_number',
         'contact_email',
+        'alternative_contact_person',
+        'alternative_contact_number',
+        'alternative_contact_email',
     ];
 }

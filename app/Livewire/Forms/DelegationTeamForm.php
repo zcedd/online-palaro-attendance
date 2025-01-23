@@ -18,6 +18,12 @@ class DelegationTeamForm extends Form
 
     public ?string $contact_email;
 
+    public ?string $alternative_contact_person;
+
+    public ?int $alternative_contact_number;
+
+    public ?string $alternative_contact_email;
+
     public ?DelegationTeam $existingForm;
 
     public function rules()
@@ -28,6 +34,9 @@ class DelegationTeamForm extends Form
             'contact_person' => 'required|string|max:255',
             'contact_number' => 'required|integer',
             'contact_email' => 'required|email|max:255',
+            'alternative_contact_person' => 'nullable|string|max:255',
+            'alternative_contact_number' => 'nullable|integer',
+            'alternative_contact_email' => 'nullable|email|max:255',
         ];
     }
 
