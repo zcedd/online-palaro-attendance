@@ -35,12 +35,10 @@ class TeamMemberSection extends Component
             $this->delegateForm->delegation_id = Auth::user()->delegation_id;
             $this->delegateForm->delegation_team_id = Auth::user()->delegationTeam->id;
             $this->delegateForm->create();
+            $this->dispatch('teamMemberSaved');
         } catch (QueryException $qe) {
-            dd($qe);
+            $this->dispatch('somethingWentWrong');
         }
-        // catch (\Throwable $th) {
-        //     dd($th);
-        // }
     }
 
     #[On('updateTeamMemberOffcanvas')]
@@ -48,7 +46,6 @@ class TeamMemberSection extends Component
     {
         $this->formAction = 'updateTeamMember';
         $this->delegateForm->getExistingForm($rowId);
-        $this->getSportEvents();
         $this->teamMemberOffcanvas = true;
     }
 
@@ -56,8 +53,9 @@ class TeamMemberSection extends Component
     {
         try {
             $this->delegateForm->update();
+            $this->dispatch('teamMemberSaved');
         } catch (QueryException $qe) {
-            dd($qe);
+            $this->dispatch('somethingWentWrong');
         }
     }
 

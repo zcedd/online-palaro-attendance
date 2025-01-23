@@ -59,7 +59,7 @@ class DelegateForm extends Form
             'address' => 'required',
             'sport_id' => 'nullable',
             'profile_photo_path' => 'nullable',
-            'profile_photo' => 'required|image'
+            'profile_photo' => 'nullable|image'
         ];
     }
 
@@ -77,7 +77,6 @@ class DelegateForm extends Form
 
     public function create()
     {
-        dd($this->all());
         $this->validate();
         $delegate = Delegate::create($this->all());
         $this->attachPhoto($delegate);
@@ -94,7 +93,7 @@ class DelegateForm extends Form
 
     public function update()
     {
-        dd($this->all());
+        $this->validate();
         $this->existingForm->update($this->all());
         $this->attachPhoto($this->existingForm);
         $this->attachSportEvent($this->existingForm);
@@ -109,8 +108,8 @@ class DelegateForm extends Form
     {
         if ($this->profile_photo) {
             $this->profile_photo_path = $this->profile_photo->store($delegate->id, 'delegate-profile-photo');
+            $delegate->update(['profile_photo_path' => $this->profile_photo_path]);
         }
-        $delegate->update(['profile_photo_path' => $this->profile_photo_path]);
     }
 
     private function attachSportEvent(Delegate $delegate)

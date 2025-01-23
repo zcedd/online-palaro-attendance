@@ -120,7 +120,7 @@
                         <x-label for="sport" class="form-label required">Sport</x-label>
                     </x-slot>
                     <x-select class="{{ $errors->has('delegateForm.sport_id') ? 'is-invalid' : '' }}" id="sport"
-                        wire:model.live="delegateForm.sport_id" wire:change="getSportEvents">
+                        wire:model.live="delegateForm.sport_id">
                         <option selected></option>
                         @foreach ($this->sports as $sport)
                         <option value="{{$sport->id}}">{{$sport->name}}</option>
@@ -229,7 +229,12 @@
             </x-slot>
 
             <x-slot name="actions">
-                <x-button form="{{ $formAction }}" class="btn-primary">
+                <x-action-message on="teamMemberSaved" class="me-1 mb-0" />
+                <x-action-message on="somethingWentWrong" color="danger" class="me-1 mb-0">
+                    Opps! Something went wrong. Please try again.
+                </x-action-message>
+
+                <x-button class="btn-primary">
                     <x-loading target="addTeamMember, updateTeamMember" size="sm" />
                     {{ ($formAction == 'addTeamMember') ? 'Create' : 'Update' }}
                 </x-button>
