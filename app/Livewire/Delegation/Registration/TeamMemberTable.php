@@ -119,7 +119,7 @@ final class TeamMemberTable extends PowerGridComponent
         return array_merge(
             parent::getListeners(),
             [
-                'RefreshTableComponent' => '$refresh',
+                'refreshTableComponent' => '$refresh',
             ]
         );
     }

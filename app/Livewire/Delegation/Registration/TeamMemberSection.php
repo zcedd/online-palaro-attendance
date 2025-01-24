@@ -39,8 +39,8 @@ class TeamMemberSection extends Component
             $this->delegateForm->delegation_team_id = Auth::user()->delegationTeam->id;
             $this->delegateForm->create();
             $this->dispatch('teamMemberSaved');
+            $this->dispatch('refreshTableComponent');
         } catch (QueryException $qe) {
-            dd($qe);
             $this->dispatch('somethingWentWrong');
         }
     }
@@ -58,6 +58,7 @@ class TeamMemberSection extends Component
         try {
             $this->delegateForm->update();
             $this->dispatch('teamMemberSaved');
+            $this->dispatch('refreshTableComponent');
         } catch (QueryException $qe) {
             $this->dispatch('somethingWentWrong');
         }
@@ -77,6 +78,7 @@ class TeamMemberSection extends Component
             $this->delegateForm->delete();
             $this->deleteTeamMemberModal = false;
             $this->dispatch('teamMemberDeleted');
+            $this->dispatch('refreshTableComponent');
         } catch (QueryException $qe) {
             $this->dispatch('somethingWentWrong');
         }
