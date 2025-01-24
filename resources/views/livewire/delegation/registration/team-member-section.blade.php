@@ -321,7 +321,8 @@
                     Opps! Something went wrong. Please try again.
                 </x-action-message>
 
-                <x-secondary-button wire:click="$toggle('teamMemberOffcanvas')" wire:loading.attr="disabled">
+                <x-secondary-button wire:click="$toggle('teamMemberOffcanvas')" wire:loading.attr="disabled"
+                    class="me-1">
                     {{ __('Cancel') }}
                 </x-secondary-button>
                 <x-button class="btn-primary">
