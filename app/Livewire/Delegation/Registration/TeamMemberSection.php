@@ -10,6 +10,7 @@ use Livewire\WithFileUploads;
 use App\Models\DelegationRole;
 use Livewire\Attributes\Computed;
 use App\Livewire\Forms\DelegateForm;
+use App\Models\Venue;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
 
@@ -121,6 +122,12 @@ class TeamMemberSection extends Component
     public function delegationRoles()
     {
         return DelegationRole::all();
+    }
+
+    #[Computed(persist: true)]
+    public function venues()
+    {
+        return Venue::where('venue_type_id', 3)->get();
     }
 
     public function render()

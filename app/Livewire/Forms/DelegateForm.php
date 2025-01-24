@@ -63,6 +63,12 @@ class DelegateForm extends Form
 
     public ?string $special_medical_need;
 
+    public ?int $venue_id;
+
+    public ?string $meal_preference;
+
+    public ?string $special_request;
+
     public ?Delegate $existingForm;
 
     public function rules()
@@ -95,6 +101,10 @@ class DelegateForm extends Form
             'recent_illness' => 'nullable',
             'family_medical_history' => 'nullable',
             'special_medical_need' => 'nullable',
+
+            'venue_id' => 'nullable',
+            'meal_preference' => 'nullable',
+            'special_request' => 'nullable',
         ];
     }
 
@@ -120,14 +130,16 @@ class DelegateForm extends Form
         $this->syncSportEvent($delegate);
         $this->syncDelegationRole($delegate);
         $this->createMedicalInformation($delegate);
+        $this->createLogisticInformation($delegate);
         $this->reset();
     }
 
     public function getExistingForm($id)
     {
-        $this->existingForm = Delegate::with('sportEvent', 'medicalInformation')->find($id);
+        $this->existingForm = Delegate::with('sportEvent', 'medicalInformation', 'logisticInformation')->find($id);
         $this->fill($this->existingForm);
         $this->fill($this->existingForm->medicalInformation);
+        $this->fill($this->existingForm->logisticInformation);
         $this->sport_event_id = $this->existingForm->sportEvent->pluck('id')->toArray();
         $this->delegation_role_id = $this->existingForm->delegationRole->pluck('id')->toArray();
     }
@@ -140,6 +152,7 @@ class DelegateForm extends Form
         $this->syncSportEvent($this->existingForm);
         $this->syncDelegationRole($this->existingForm);
         $this->updateMedicalInformation($this->existingForm);
+        $this->updateLogisticInformation($this->existingForm);
     }
 
     public function delete()
@@ -173,5 +186,15 @@ class DelegateForm extends Form
     private function updateMedicalInformation(Delegate $delegate)
     {
         $delegate->medicalInformation()->update($this->all());
+    }
+
+    private function createLogisticInformation(Delegate $delegate)
+    {
+        $delegate->logisticInformation()->create($this->all());
+    }
+
+    private function updateLogisticInformation(Delegate $delegate)
+    {
+        $delegate->logisticInformation()->update($this->all());
     }
 }

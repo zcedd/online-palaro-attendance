@@ -387,6 +387,46 @@
                         id="special-medical-need" wire:model="delegateForm.special_medical_need" />
                     <x-input-error for="delegateForm.special_medical_need" />
                 </x-form-panel-vertical>
+                <x-section-title class="mt-4">
+                    <x-slot name="title">Logistic Information</x-slot>
+                    <x-slot name="description">
+                        <span class="small">
+                            Please provide the delegate's logistic information.
+                        </span>
+                    </x-slot>
+                </x-section-title>
+                <x-form-panel-vertical>
+                    <x-slot name="label">
+                        <x-label for="accommodation" class="form-label required">Accommodation
+                        </x-label>
+                    </x-slot>
+                    <x-select class="{{ $errors->has('delegateForm.venue_id') ? 'is-invalid' : '' }}" id="accommodation"
+                        wire:model="delegateForm.venue_id">
+                        <option selected></option>
+                        @foreach ($this->venues as $venue)
+                        <option value="{{ $venue->id }}">{{ $venue->name }}</option>
+                        @endforeach
+                    </x-select>
+                    <x-input-error for="delegateForm.venue_id" />
+                </x-form-panel-vertical>
+                <x-form-panel-vertical>
+                    <x-slot name="label">
+                        <x-label for="meal-preference" class="form-label required">Meal Preference
+                        </x-label>
+                    </x-slot>
+                    <x-input type="text" class="{{ $errors->has('delegateForm.meal_preference') ? 'is-invalid' : '' }}"
+                        id="meal-preference" wire:model="delegateForm.meal_preference" />
+                    <x-input-error for="delegateForm.meal_preference" />
+                </x-form-panel-vertical>
+                <x-form-panel-vertical>
+                    <x-slot name="label">
+                        <x-label for="special-request" class="form-label required">Special Request
+                        </x-label>
+                    </x-slot>
+                    <x-input type="text" class="{{ $errors->has('delegateForm.special_request') ? 'is-invalid' : '' }}"
+                        id="special-request" wire:model="delegateForm.special_request" />
+                    <x-input-error for="delegateForm.special_request" />
+                </x-form-panel-vertical>
             </x-slot>
 
             <x-slot name="actions">
