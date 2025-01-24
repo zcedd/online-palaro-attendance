@@ -321,6 +321,9 @@
                     Opps! Something went wrong. Please try again.
                 </x-action-message>
 
+                <x-secondary-button wire:click="$toggle('teamMemberOffcanvas')" wire:loading.attr="disabled">
+                    {{ __('Cancel') }}
+                </x-secondary-button>
                 <x-button class="btn-primary">
                     <x-loading target="addTeamMember, updateTeamMember" size="sm" />
                     {{ ($formAction == 'addTeamMember') ? 'Create' : 'Update' }}
