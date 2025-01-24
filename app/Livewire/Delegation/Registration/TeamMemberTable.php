@@ -18,11 +18,11 @@ final class TeamMemberTable extends PowerGridComponent
 
     public function setUp(): array
     {
-        $this->showCheckBox();
+        // $this->showCheckBox();
 
         return [
-            PowerGrid::header()
-                ->showSearchInput(),
+            // PowerGrid::header(),
+            // ->showSearchInput(),
             PowerGrid::footer()
                 ->showPerPage()
                 ->showRecordCount(),
@@ -58,6 +58,8 @@ final class TeamMemberTable extends PowerGridComponent
     public function columns(): array
     {
         return [
+            Column::make('Profile photo', 'profile_photo_path'),
+
             Column::make('First name', 'first_name')
                 ->sortable()
                 ->searchable(),
@@ -84,12 +86,6 @@ final class TeamMemberTable extends PowerGridComponent
             Column::make('Contact number', 'contact_number')
                 ->sortable()
                 ->searchable(),
-
-            Column::make('Email', 'email')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Profile photo', 'profile_photo_path'),
 
             Column::make('Address', 'address')
                 ->sortable()
