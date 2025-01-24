@@ -21,6 +21,8 @@ class TeamMemberSection extends Component
 
     public bool $teamMemberOffcanvas = false;
 
+    public bool $deleteTeamMemberModal = false;
+
     public ?string $formAction;
 
     #[On('addTeamMemberOffcanvas')]
@@ -38,6 +40,7 @@ class TeamMemberSection extends Component
             $this->delegateForm->create();
             $this->dispatch('teamMemberSaved');
         } catch (QueryException $qe) {
+            dd($qe);
             $this->dispatch('somethingWentWrong');
         }
     }
@@ -60,20 +63,22 @@ class TeamMemberSection extends Component
         }
     }
 
-    #[On('deleteTeamMemberOffcanvas')]
-    public function deleteTeamMemberOffcanvas($id)
+    #[On('deleteTeamMemberModal')]
+    public function deleteTeamMemberModal($rowId)
     {
-        $this->teamMemberOffcanvas = true;
+        $this->deleteTeamMemberModal = true;
         $this->formAction = 'updateTeamMember';
-        $this->delegateForm->getExistingForm($id);
+        $this->delegateForm->getExistingForm($rowId);
     }
 
     public function deleteTeamMember()
     {
         try {
             $this->delegateForm->delete();
+            $this->deleteTeamMemberModal = false;
+            $this->dispatch('teamMemberDeleted');
         } catch (QueryException $qe) {
-            dd($qe);
+            $this->dispatch('somethingWentWrong');
         }
     }
 

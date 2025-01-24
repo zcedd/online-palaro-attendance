@@ -9,9 +9,36 @@
                     </span>
                 </x-slot>
             </x-section-title>
+
+            <x-action-message on="somethingWentWrong" color="danger">
+                Opps! Something went wrong. Please try again.
+            </x-action-message>
+
+            <x-action-message on="teamMemberDeleted">
+                Team member has been deleted.
+            </x-action-message>
+
             <livewire:delegation.registration.team-member-table />
         </div>
     </div>
+
+    <x-delete-confirmation-modal wire:model="deleteTeamMemberModal">
+        <x-slot name="title">
+            Delete Team Member
+        </x-slot>
+        <x-slot name="content">
+            Are you sure you want to delete this team member?
+        </x-slot>
+        <x-slot name="footer">
+            <x-secondary-button wire:click="$toggle('deleteTeamMemberModal')" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+            </x-secondary-button>
+            <x-button class="btn-danger" wire:click="deleteTeamMember">
+                <x-loading target="deleteTeamMember" size="sm" />
+                Delete
+            </x-button>
+        </x-slot>
+    </x-delete-confirmation-modal>
 
 
     <x-offcanvas wire:model.live="teamMemberOffcanvas">

@@ -136,7 +136,7 @@ final class TeamMemberTable extends PowerGridComponent
                 ->slot('Delete')
                 ->id()
                 ->class('btn btn-danger')
-                ->dispatch('deleteTeamMemberOffcanvas', ['rowId' => $row->id])
+                ->dispatch('deleteTeamMemberModal', ['rowId' => $row->id])
         ];
     }
 
