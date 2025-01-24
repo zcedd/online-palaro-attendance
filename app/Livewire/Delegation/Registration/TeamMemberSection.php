@@ -41,6 +41,7 @@ class TeamMemberSection extends Component
             $this->dispatch('teamMemberSaved');
             $this->dispatch('refreshTableComponent');
         } catch (QueryException $qe) {
+            dd($qe);
             $this->dispatch('somethingWentWrong');
         }
     }

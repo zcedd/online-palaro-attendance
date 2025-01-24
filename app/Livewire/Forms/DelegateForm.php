@@ -43,6 +43,26 @@ class DelegateForm extends Form
 
     public array $delegation_role_id = [''];
 
+    public ?string $blood_type;
+
+    public ?string $allergy;
+
+    public ?string $chronic_illness;
+
+    public ?string $current_medication;
+
+    public ?string $past_medical_history;
+
+    public ?string $vaccine_received;
+
+    public ?string $physical_limitation;
+
+    public ?string $recent_illness;
+
+    public ?string $family_medical_history;
+
+    public ?string $special_medical_need;
+
     public ?Delegate $existingForm;
 
     public function rules()
@@ -64,6 +84,17 @@ class DelegateForm extends Form
             'profile_photo' => 'nullable|image',
             'delegation_role_id.*' => 'required',
             'sport_event_id.*' => 'required',
+
+            'blood_type' => 'nullable',
+            'allergy' => 'nullable',
+            'chronic_illness' => 'nullable',
+            'current_medication' => 'nullable',
+            'past_medical_history' => 'nullable',
+            'vaccine_received' => 'nullable',
+            'physical_limitation' => 'nullable',
+            'recent_illness' => 'nullable',
+            'family_medical_history' => 'nullable',
+            'special_medical_need' => 'nullable',
         ];
     }
 
@@ -88,13 +119,15 @@ class DelegateForm extends Form
         $this->attachPhoto($delegate);
         $this->syncSportEvent($delegate);
         $this->syncDelegationRole($delegate);
+        $this->createMedicalInformation($delegate);
         $this->reset();
     }
 
     public function getExistingForm($id)
     {
-        $this->existingForm = Delegate::with('sportEvent')->find($id);
+        $this->existingForm = Delegate::with('sportEvent', 'medicalInformation')->find($id);
         $this->fill($this->existingForm);
+        $this->fill($this->existingForm->medicalInformation);
         $this->sport_event_id = $this->existingForm->sportEvent->pluck('id')->toArray();
         $this->delegation_role_id = $this->existingForm->delegationRole->pluck('id')->toArray();
     }
@@ -106,6 +139,7 @@ class DelegateForm extends Form
         $this->attachPhoto($this->existingForm);
         $this->syncSportEvent($this->existingForm);
         $this->syncDelegationRole($this->existingForm);
+        $this->updateMedicalInformation($this->existingForm);
     }
 
     public function delete()
@@ -129,5 +163,15 @@ class DelegateForm extends Form
     private function syncDelegationRole(Delegate $delegate)
     {
         $delegate->delegationRole()->sync($this->delegation_role_id);
+    }
+
+    private function createMedicalInformation(Delegate $delegate)
+    {
+        $delegate->medicalInformation()->create($this->all());
+    }
+
+    private function updateMedicalInformation(Delegate $delegate)
+    {
+        $delegate->medicalInformation()->update($this->all());
     }
 }

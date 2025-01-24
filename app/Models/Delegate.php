@@ -41,6 +41,11 @@ class Delegate extends Model
         return $this->hasOne(DelegationTeam::class);
     }
 
+    public function medicalInformation(): HasOne
+    {
+        return $this->hasOne(DelegateMedicalInformation::class);
+    }
+
     public function delegationRole(): BelongsToMany
     {
         return $this->belongsToMany(DelegationRole::class);

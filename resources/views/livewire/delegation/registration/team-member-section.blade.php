@@ -222,7 +222,7 @@
                         <div class="col-10">
                             <x-select
                                 class="{{ $errors->has('delegateForm.sport_event_id.'.$key) ? 'is-invalid' : '' }}"
-                                id="sport-event-{{ $key }}" wire:model.live="delegateForm.sport_event_id.{{ $key }}">
+                                id="sport-event-{{ $key }}" wire:model="delegateForm.sport_event_id.{{ $key }}">
                                 <option selected></option>
                                 @if ($this->delegateForm->sport_id)
                                 @forelse ($this->sportEvents->where('sport_id', $delegateForm->sport_id) as $sportEvent)
@@ -231,7 +231,7 @@
                                     {{ $sportEvent->subcategory ? " - " . $sportEvent->subcategory : "" }}
                                 </option>
                                 @empty
-                                <option>Select sport first</option>
+                                <option value="null">Select sport first</option>
                                 @endforelse
                                 @endif
                             </x-select>
@@ -307,11 +307,85 @@
                 </x-section-title>
                 <x-form-panel-vertical>
                     <x-slot name="label">
+                        <x-label for="blood-type" class="form-label required">Blood Type</x-label>
+                    </x-slot>
+                    <x-input type="text" class="{{ $errors->has('delegateForm.blood_type') ? 'is-invalid' : '' }}"
+                        id="blood-type" wire:model="delegateForm.blood_type" />
+                    <x-input-error for="delegateForm.blood_type" />
+                </x-form-panel-vertical>
+                <x-form-panel-vertical>
+                    <x-slot name="label">
                         <x-label for="allergy" class="form-label required">Allergy</x-label>
                     </x-slot>
-                    <x-input type="text" class="{{ $errors->has('delegateMedicalForm.allergy') ? 'is-invalid' : '' }}"
-                        id="allergy" wire:model="delegateMedical.allergy" />
-                    <x-input-error for="delegateMedical.allergy" />
+                    <x-input type="text" class="{{ $errors->has('delegateForm.allergy') ? 'is-invalid' : '' }}"
+                        id="allergy" wire:model="delegateForm.allergy" />
+                    <x-input-error for="delegateForm.allergy" />
+                </x-form-panel-vertical>
+                <x-form-panel-vertical>
+                    <x-slot name="label">
+                        <x-label for="chronic-illness" class="form-label required">Chronic Illness</x-label>
+                    </x-slot>
+                    <x-textarea class="{{ $errors->has('delegateForm.chronic_illness') ? 'is-invalid' : '' }}"
+                        id="chronic-illness" wire:model="delegateForm.chronic_illness" />
+                    <x-input-error for="delegateForm.chronic_illness" />
+                </x-form-panel-vertical>
+                <x-form-panel-vertical>
+                    <x-slot name="label">
+                        <x-label for="current-medication" class="form-label required">Current Medication</x-label>
+                    </x-slot>
+                    <x-textarea class="{{ $errors->has('delegateForm.current_medication') ? 'is-invalid' : '' }}"
+                        id="current-medication" wire:model="delegateForm.current_medication" />
+                    <x-input-error for="delegateForm.current_medication" />
+                </x-form-panel-vertical>
+                <x-form-panel-vertical>
+                    <x-slot name="label">
+                        <x-label for="past-medical-history" class="form-label required">Past Medical History</x-label>
+                    </x-slot>
+                    <x-textarea class="{{ $errors->has('delegateForm.past_medical_history') ? 'is-invalid' : '' }}"
+                        id="past-medical-history" wire:model="delegateForm.past_medical_history" />
+                    <x-input-error for="delegateForm.past_medical_history" />
+                </x-form-panel-vertical>
+                <x-form-panel-vertical>
+                    <x-slot name="label">
+                        <x-label for="vaccine-received" class="form-label required">Vaccine Received</x-label>
+                    </x-slot>
+                    <x-textarea class="{{ $errors->has('delegateForm.vaccine_received') ? 'is-invalid' : '' }}"
+                        id="vaccine-received" wire:model="delegateForm.vaccine_received" />
+                    <x-input-error for="delegateForm.vaccine_received" />
+                </x-form-panel-vertical>
+                <x-form-panel-vertical>
+                    <x-slot name="label">
+                        <x-label for="physical-limitation" class="form-label required">Physical Limitation</x-label>
+                    </x-slot>
+                    <x-textarea class="{{ $errors->has('delegateForm.physical_limitation') ? 'is-invalid' : '' }}"
+                        id="vaccine-received" wire:model="delegateForm.physical_limitation" />
+                    <x-input-error for="delegateForm.physical_limitation" />
+                </x-form-panel-vertical>
+                <x-form-panel-vertical>
+                    <x-slot name="label">
+                        <x-label for="recent-illness" class="form-label required">Recent Illness</x-label>
+                    </x-slot>
+                    <x-textarea class="{{ $errors->has('delegateForm.recent_illness') ? 'is-invalid' : '' }}"
+                        id="recent-illness" wire:model="delegateForm.recent_illness" />
+                    <x-input-error for="delegateForm.recent_illness" />
+                </x-form-panel-vertical>
+                <x-form-panel-vertical>
+                    <x-slot name="label">
+                        <x-label for="family-medical-history" class="form-label required">Family Medical History
+                        </x-label>
+                    </x-slot>
+                    <x-textarea class="{{ $errors->has('delegateForm.family_medical_history') ? 'is-invalid' : '' }}"
+                        id="family-medical-history" wire:model="delegateForm.family_medical_history" />
+                    <x-input-error for="delegateForm.family_medical_history" />
+                </x-form-panel-vertical>
+                <x-form-panel-vertical>
+                    <x-slot name="label">
+                        <x-label for="special-medical-need" class="form-label required">Special Medical Need
+                        </x-label>
+                    </x-slot>
+                    <x-textarea class="{{ $errors->has('delegateForm.special_medical_need') ? 'is-invalid' : '' }}"
+                        id="special-medical-need" wire:model="delegateForm.special_medical_need" />
+                    <x-input-error for="delegateForm.special_medical_need" />
                 </x-form-panel-vertical>
             </x-slot>
 
