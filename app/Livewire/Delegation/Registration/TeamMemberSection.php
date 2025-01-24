@@ -7,8 +7,10 @@ use Livewire\Component;
 use App\Models\SportEvent;
 use Livewire\Attributes\On;
 use Livewire\WithFileUploads;
+use App\Models\DelegationRole;
 use Livewire\Attributes\Computed;
 use App\Livewire\Forms\DelegateForm;
+use App\Models\Venue;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
 
@@ -19,6 +21,8 @@ class TeamMemberSection extends Component
     public DelegateForm $delegateForm;
 
     public bool $teamMemberOffcanvas = false;
+
+    public bool $deleteTeamMemberModal = false;
 
     public ?string $formAction;
 
@@ -35,12 +39,12 @@ class TeamMemberSection extends Component
             $this->delegateForm->delegation_id = Auth::user()->delegation_id;
             $this->delegateForm->delegation_team_id = Auth::user()->delegationTeam->id;
             $this->delegateForm->create();
+            $this->dispatch('teamMemberSaved');
+            $this->dispatch('refreshTableComponent');
         } catch (QueryException $qe) {
             dd($qe);
+            $this->dispatch('somethingWentWrong');
         }
-        // catch (\Throwable $th) {
-        //     dd($th);
-        // }
     }
 
     #[On('updateTeamMemberOffcanvas')]
@@ -48,7 +52,6 @@ class TeamMemberSection extends Component
     {
         $this->formAction = 'updateTeamMember';
         $this->delegateForm->getExistingForm($rowId);
-        $this->getSportEvents();
         $this->teamMemberOffcanvas = true;
     }
 
@@ -56,25 +59,30 @@ class TeamMemberSection extends Component
     {
         try {
             $this->delegateForm->update();
+            $this->dispatch('teamMemberSaved');
+            $this->dispatch('refreshTableComponent');
         } catch (QueryException $qe) {
-            dd($qe);
+            $this->dispatch('somethingWentWrong');
         }
     }
 
-    #[On('deleteTeamMemberOffcanvas')]
-    public function deleteTeamMemberOffcanvas($id)
+    #[On('deleteTeamMemberModal')]
+    public function deleteTeamMemberModal($rowId)
     {
-        $this->teamMemberOffcanvas = true;
+        $this->deleteTeamMemberModal = true;
         $this->formAction = 'updateTeamMember';
-        $this->delegateForm->getExistingForm($id);
+        $this->delegateForm->getExistingForm($rowId);
     }
 
     public function deleteTeamMember()
     {
         try {
             $this->delegateForm->delete();
+            $this->deleteTeamMemberModal = false;
+            $this->dispatch('teamMemberDeleted');
+            $this->dispatch('refreshTableComponent');
         } catch (QueryException $qe) {
-            dd($qe);
+            $this->dispatch('somethingWentWrong');
         }
     }
 
@@ -88,9 +96,14 @@ class TeamMemberSection extends Component
         unset($this->delegateForm->sport_event_id[$arrayKey]);
     }
 
-    public function getSportEvents()
+    public function addDelegationRole(): void
     {
-        $this->sportEventFiltered = $this->sportEvents->where('sport_id', $this->delegateForm->sport_id);
+        $this->delegateForm->delegation_role_id[] = '';
+    }
+
+    public function removeDelegationRole($arrayKey): void
+    {
+        unset($this->delegateForm->delegation_role_id[$arrayKey]);
     }
 
     #[Computed(persist: true)]
@@ -103,6 +116,18 @@ class TeamMemberSection extends Component
     public function sportEvents()
     {
         return SportEvent::all();
+    }
+
+    #[Computed(persist: true)]
+    public function delegationRoles()
+    {
+        return DelegationRole::all();
+    }
+
+    #[Computed(persist: true)]
+    public function venues()
+    {
+        return Venue::where('venue_type_id', 3)->get();
     }
 
     public function render()

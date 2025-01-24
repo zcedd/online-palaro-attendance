@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Delegate extends Model
 {
@@ -33,6 +34,21 @@ class Delegate extends Model
     public function delegation(): BelongsTo
     {
         return $this->belongsTo(Delegation::class);
+    }
+
+    public function delegationTeam(): HasOne
+    {
+        return $this->hasOne(DelegationTeam::class);
+    }
+
+    public function medicalInformation(): HasOne
+    {
+        return $this->hasOne(DelegateMedicalInformation::class);
+    }
+
+    public function logisticInformation(): HasOne
+    {
+        return $this->hasOne(DelegateLogisticInformation::class);
     }
 
     public function delegationRole(): BelongsToMany

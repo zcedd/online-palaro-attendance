@@ -80,7 +80,7 @@
                         <img class="rounded-circle" width="32" height="32" src="{{ Auth::user()->profile_photo_url }}"
                             alt="{{ Auth::user()->first_name }}" />
                         @else
-                        {{ Auth::user()->name }}
+                        {{ Auth::user()->first_name }}
 
                         <svg class="ms-2" width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                             fill="currentColor">

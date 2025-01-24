@@ -78,7 +78,7 @@
 
     <x-slot name="actions">
         <div class="d-flex align-items-baseline">
-            <x-button>
+            <x-button class="btn-primary">
                 <div wire:loading class="spinner-border spinner-border-sm" role="status">
                     <span class="visually-hidden">Loading...</span>
                 </div>

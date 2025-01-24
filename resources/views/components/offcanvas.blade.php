@@ -44,7 +44,7 @@ $placement = [
     data-bs-backdrop="static" aria-labelledby="offcanvas-id-{{ $id }}" aria-hidden="true"
     x-ref="offcanvas-id-{{ $id }}">
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title">{{ $title }}</h5>
+        <h4 class="offcanvas-title">{{ $title }}</h4>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">

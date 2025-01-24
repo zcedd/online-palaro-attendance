@@ -16,6 +16,7 @@ class VenueTypeSeeder extends Seeder
         $venueType = [
             ['name' => 'Billeting venue'],
             ['name' => 'Competition venue'],
+            ['name' => 'Accommodation'],
         ];
 
         DB::table('venue_types')->insert($venueType);

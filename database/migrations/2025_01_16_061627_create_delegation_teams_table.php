@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('contact_person');
             $table->string('contact_number');
             $table->string('contact_email');
+            $table->string('alternative_contact_person')->nullable();
+            $table->string('alternative_contact_number')->nullable();
+            $table->string('alternative_contact_email')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
